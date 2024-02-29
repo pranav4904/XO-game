@@ -101,25 +101,20 @@ bool game_over(char board[][size])
 
 int mini_max_algo(char board[][size], int depth, bool is_ai) 
 {
-    int score = 0, best_score = 0;
+    int score = (is_ai) ? INT_MIN : INT_MAX;
+    int best_score = score;
 
     if (game_over(board)) 
     {
-        if (is_ai == true) 
-        {
-            return -10;
-        } else 
-        {
-            return 10;
-        }
+        return (is_ai) ? -10 : 10;
     } 
     else 
     {
         if (depth < 9) 
         {
-            if (is_ai == true) 
+            if (is_ai) 
             {
-                best_score = -999;
+                best_score = INT_MIN;
                 for (int i = 0; i < size; i++) 
                 {
                     for (int j = 0; j < size; j++) 
@@ -129,10 +124,7 @@ int mini_max_algo(char board[][size], int depth, bool is_ai)
                             board[i][j] = AI_move;
                             score = mini_max_algo(board, depth + 1, false);
                             board[i][j] = ' ';
-                            if (best_score < score) 
-                            {
-                                best_score = score;
-                            }
+                            best_score = max(best_score, score);
                         }
                     }
                 }
@@ -140,7 +132,7 @@ int mini_max_algo(char board[][size], int depth, bool is_ai)
             } 
             else 
             {
-                best_score = 999;
+                best_score = INT_MAX;
                 for (int i = 0; i < size; i++) 
                 {
                     for (int j = 0; j < size; j++) 
@@ -150,10 +142,7 @@ int mini_max_algo(char board[][size], int depth, bool is_ai)
                             board[i][j] = human_move;
                             score = mini_max_algo(board, depth + 1, true);
                             board[i][j] = ' ';
-                            if (score < best_score) 
-                            {
-                                best_score = score;
-                            }
+                            best_score = min(best_score, score);
                         }
                     }
                 }
@@ -166,6 +155,7 @@ int mini_max_algo(char board[][size], int depth, bool is_ai)
         }
     }
 }
+
 
 int move(char board[][size], int move_idx) 
 {
