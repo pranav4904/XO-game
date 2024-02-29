@@ -1,2 +1,2 @@
-# XO-game
-XO game using minimax algo
+# XO-game-using-minimax
+The C++ code represents a console-based Tic-Tac-Toe game where a player can play against an AI opponent using the Minimax algorithm. The game provides a user-friendly interface with clear instructions and displays the current state of the game board after each move. The AI opponent strategically makes its moves using the Minimax algorithm, ensuring a challenging gameplay experience. Players can choose to start the game first or let the AI take the first move. The game continues until there is a winner or a draw, and players have the option to play again or quit after each game. The code uses a simple console interface to interact with the users and manage the game flow.
